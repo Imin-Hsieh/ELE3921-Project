@@ -19,13 +19,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# I would put this in an environment variable if it were a real application,
+# but I assume it's not a big problem for the course.
 SECRET_KEY = 'django-insecure-9j(=$pz*pg+37cdih5hqf6l7(1*ycu^22qdg1dwf@t@=^mq51@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+AUTH_USER_MODEL = "accounts.User"
 
 
 # Application definition
@@ -40,7 +43,8 @@ INSTALLED_APPS = [
     "core",
     "search",
     "profile_page",
-    "post"
+    "post",
+    "accounts"
 ]
 
 MIDDLEWARE = [
