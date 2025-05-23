@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "core",
     "search",
-    "profile",
+    "profile_page",
     "post"
 ]
 
