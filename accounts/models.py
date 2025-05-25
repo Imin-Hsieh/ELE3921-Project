@@ -11,3 +11,15 @@ class User(AbstractUser):
         INSTITUTION = ("institution", "Institution")
         
     account_type = models.CharField(max_length=20, choices=Role.choices)
+
+    @property
+    def is_user(self):
+        return self.account_type == self.Role.USER
+    
+    @property
+    def is_professional(self):
+        return self.account_type == self.Role.PROFESSIONAL
+    
+    @property
+    def is_institution(self):
+        return self.account_type == self.Role.INSTITUTION

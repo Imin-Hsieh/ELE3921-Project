@@ -1,5 +1,15 @@
 <form method="{% block method %}post{% endblock %}" action="{% block action %}{% endblock %}">
     {% csrf_token %}
+
+    {% if form and form.non_field_errors %}
+    <div class="container text-danger">
+        <ul>
+            {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
     {% block content %}{% endblock %}
 
     <button type="submit" class="btn btn-primary">{% block submit %}{% endblock %}</button>

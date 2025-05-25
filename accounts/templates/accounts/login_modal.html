@@ -9,3 +9,7 @@
 {% include "accounts/login_form.html" %}
 
 {% endblock %}
+
+{% block footer %}
+<a href="{% url 'register' %}" class="btn btn-link">No user? Click to register</a>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "form_base.html" %}
+
+{% block method %}post{% endblock %}
+{% block action %}{% url "register" %}{% endblock %}
+{% block submit %}Register{% endblock %}
+
+{% block content %}
+
+<div class="mb-3 mt-3">
+    <label for="username" class="form-label">Username:</label>
+    <input type="text" class="form-control" id="username" placeholder="Choose a username" name="username", value="{{ form.username.value|default_if_none:'' }}">
+    {% if form and "username" in form.errors %}
+    <ul class="text-danger">
+        {% for error in form.errors.username %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+<div class="mb-3">
+    <label for="email" class="form-label">Email:</label>
+    <input type="email" class="form-control" id="email" placeholder="Enter an email" name="email", value="{{ form.email.value|default_if_none:'' }}">
+    {% if form and "email" in form.errors %}
+    <ul class="text-danger">
+        {% for error in form.errors.email %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+<div class="mb-3">
+    <label for="password1" class="form-label">Choose a password:</label>
+    <input type="password" class="form-control" id="password1" placeholder="Choose a password" name="password1", value="{{ form.password1.value|default_if_none:'' }}">
+    {% if form and "password1" in form.errors %}
+    <ul class="text-danger">
+        {% for error in form.errors.password1 %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+<div class="mb-3">
+    <label for="password2" class="form-label">Repeat password:</label>
+    <input type="password" class="form-control" id="password2" placeholder="Choose a password" name="password2", value="{{ form.password2.value|default_if_none:'' }}">
+    {% if form and "password2" in form.errors %}
+    <ul class="text-danger">
+        {% for error in form.errors.password2 %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+<div class="mb-3">
+    <label for="fname" class="form-label">First name:</label>
+    <input type="text" class="form-control" id="fname" placeholder="First name" name="first_name", value="{{ form.first_name.value|default_if_none:'' }}">
+    {% if form and "first_name" in form.errors %}
+    <ul class="text-danger">
+        {% for error in form.errors.first_name %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+<div class="mb-3">
+    <label for="lname" class="form-label">Last name:</label>
+    <input type="text" class="form-control" id="lname" placeholder="Last name" name="last_name", value="{{ form.last_name.value|default_if_none:'' }}">
+    {% if form and "last_name" in form.errors %}
+    <ul class="text-danger">
+        {% for error in form.errors.last_name %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+
+{% endblock %}

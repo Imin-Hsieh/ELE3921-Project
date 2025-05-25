@@ -7,7 +7,7 @@ class Info(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     time_posted = models.DateTimeField(auto_now_add=True)
-    # note: should be possible to update Posts, so no last_updated time here
+    # note: should NOT be possible to update Posts, so no last_updated time here
 
     class Meta:
         abstract = True

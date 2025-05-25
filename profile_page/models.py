@@ -4,14 +4,13 @@ from search.models import Category
 
 # Create your models here.
 
-class ProfileInfo(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profile")
 
-class UserProfile(ProfileInfo):
-    pass
-
-class ProfessionalProfile(ProfileInfo):
+class ProfessionalProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="professional_profile")
     specializations = models.ManyToManyField(Category, related_name="professionals")
 
-class InstitutionProfile(ProfileInfo):
+class InstitutionProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="institution_profile")
     professionals = models.ManyToManyField(ProfessionalProfile, related_name="institutions")

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib.messages import constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -129,3 +130,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# This is so that the messages can be mapped to a Bootstrap 5 class,
+# for example: alert-{{ messages.error }} --> alert-danger
+#
+# Note that messages.success/info/warning already map correctly by default.
+MESSAGE_TAGS = {
+    constants.ERROR : "danger"
+}

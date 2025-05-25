@@ -13,16 +13,29 @@
 <body class="bg-light">
 <div class="container">
 
-    <nav class="navbar navbar-expand-sm bg-dark fw-bold">
+    <nav class="navbar navbar-expand-sm bg-dark fw-bold mb-3">
         <div class="container-fluid">
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link text-light" href="#">Link 1</a></li>
                 <li class="nav-item"><a class="nav-link text-light" href="#">Link 2</a></li>
                 <li class="nav-item"><a class="nav-link text-light" href="#">Link 3</a></li>
-                {% include "accounts/login_modal.html" with id="hei" %}
+                {% if user.is_authenticated %}
+                    <!--p class="text-light">{{ user.username }}</p-->
+                    <li class="nav-item"><a class="nav-link text-light" href="{% url 'logout' %}">Log out</a></li>
+                {% else %}
+                    {% include "accounts/login_modal.html" with id="loginModal" %}
+                {% endif %}
             </ul>
         </div>
     </nav>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     
     {% block content %}{% endblock %} <!-- The main content of each template -->
     
