@@ -19,6 +19,7 @@ class Post(Info):
 
 # An answer to a post, written by a professional user
 class Answer(Info):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="answers")
     author = models.ForeignKey(ProfessionalProfile, on_delete=models.CASCADE, related_name="answers")
     last_updated = models.DateTimeField(auto_now=True)
 

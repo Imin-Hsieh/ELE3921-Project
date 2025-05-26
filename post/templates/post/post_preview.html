@@ -1,0 +1,7 @@
+<!--Provide variable "post" when including-->
+
+<div class="card">
+    <div class="card-header">{{ post.title }}</div>
+    <div class="card-body">{{ post.content|truncatechars:100 }}</div>
+    <div class="card-footer">{{ post.answers.count|pluralize }}.</div>
+</div>

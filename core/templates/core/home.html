@@ -2,4 +2,5 @@
 
 {% block content %}
     <a href="{% url 'write_post' %}" class="btn btn-primary">Write a new post</a>
+    {% include "search/search_bar.html" %}
 {% endblock %}
