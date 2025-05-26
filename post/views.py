@@ -42,3 +42,6 @@ def view_post(request, post_id):
         "post" : post
     }
     return render(request, "post/view_post.html", context=context)
+
+def submit_answer(request, post_id):
+    pass # need to do something with Form again

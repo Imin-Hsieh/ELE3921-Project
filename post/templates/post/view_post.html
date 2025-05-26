@@ -14,6 +14,16 @@
             <li>{{ category.name }}</li>
         {% endfor %}
     </ul>
+    
+    <!--Code for the answering of posts-->
+    {% if request.user.is_professional %}
+    
+    <button type="button" class="btn btn-primary" id="write_answer_button">Write an answer</button>
+    <div class="form-container" id="answer_form" hidden>
+        {% include "post/answer_form.html" %}
+    </div>
+    {% endif %}
+    
     <h5>Answers</h5>
     <!--Include a button if the user is a Professional, to let them answer-->
     <ul>
@@ -22,7 +32,8 @@
             <li>{{ answer.author }}</li>
         {% endfor %}
     </ul>
-
-    
 </div>
+
+<script src="{% static 'js/view_post.js' %}"></script>
+
 {% endblock %}

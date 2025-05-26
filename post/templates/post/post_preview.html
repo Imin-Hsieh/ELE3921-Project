@@ -1,7 +1,9 @@
 <!--Provide variable "post" when including-->
 
-<div class="card">
-    <div class="card-header">{{ post.title }}</div>
-    <div class="card-body">{{ post.content|truncatechars:100 }}</div>
-    <div class="card-footer">{{ post.answers.count|pluralize }}.</div>
-</div>
+<a href="{% url 'view_post' post.id %}" class="text-decoration-none popout">
+    <div class="card">
+        <div class="card-header"><h5>{{ post.title }}</h5></div>
+        <div class="card-body"><p class="fst-italic">{{ post.content|truncatechars:150 }}</p></div>
+        <div class="card-footer">{{ post.answers.count }} answer{{ post.answers.count|pluralize }}.</div>
+    </div>
+</a>
