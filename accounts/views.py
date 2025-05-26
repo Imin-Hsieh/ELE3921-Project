@@ -14,6 +14,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
+            messages.success(request, "You were successfully logged in!")
             return redirect("home")
     else:
         form = AuthenticationForm()

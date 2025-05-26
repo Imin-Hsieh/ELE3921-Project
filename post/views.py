@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from profile_page.models import Category
+from .models import Post
 from .forms import PostForm
 from django.contrib import messages
+from django.urls import reverse
 
 # Write posts and post them
 def write_post(request):
@@ -19,9 +21,9 @@ def write_post(request):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.author = request.user.userprofile
+            post.author = request.user.user_profile
             post.save()
-            return redirect("home") # might wanna redirect to the actual post
+            return redirect(reverse("view_post", kwargs={"post_id" : post.id}))
     else:
         form = PostForm()
     
@@ -31,3 +33,12 @@ def write_post(request):
         "form" : form
     }
     return render(request, "post/write_post.html", context=context)
+
+
+def view_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    context = {
+        "title" : post.title,
+        "post" : post
+    }
+    return render(request, "post/view_post.html", context=context)

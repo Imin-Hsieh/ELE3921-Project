@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <h5>Title: {{ post.title }}</h5>
+    <p>Author: {{ post.author.username }}</p>
+    <div>
+        {{ post.content|linebreaks }}
+    </div>
+    <h5>Categories</h5>
+    <ul>
+        {% for category in post.categories.all %}
+            <li>{{ category.name }}</li>
+        {% endfor %}
+    </ul>
+    <h5>Categories</h5>
+    <!--Include a button if the user is a Professional, to let them answer-->
+    <ul>
+        {% for answer in post.answers.all %}
+            <!--probably include another template instead of a ul like this-->
+            <li>{{ answer.author }}</li>
+        {% endfor %}
+    </ul>
+
+    
+</div>
+{% endblock %}
