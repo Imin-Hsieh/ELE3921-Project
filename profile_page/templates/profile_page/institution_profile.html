@@ -3,18 +3,25 @@
 
 <!--HEADER-->
 {% block profile_header %}
-Institution {{ profile_user.username }}
+<h2>{{ profile_user.first_name }}</h2>
 {% endblock %}
 
 
 <!--BODY-->
 {% block profile_body %}
+<em>Legal name: {{ profile_user.last_name }}</em>
 
+<div>
 {% if user == profile_user %}
-<p>Hi, user!</p>
-{% else %}
-<p>Someone else?</p>
+{% include "accounts/register_prof_modal.html" with institution_id=profile_user.id id="profRegisterModal" %}
 {% endif %}
+</div>
+
+<ul>
+    {% for prof in profile_user.institution_profile.professionals.all %}
+    <li>{{ prof.user.first_name }} {{ prof.user.last_name }}</li>
+    {% endfor %}
+</ul>
 
 {% endblock %}
 
