@@ -3,12 +3,18 @@
 
 <!--HEADER-->
 {% block profile_header %}
-Institution
+Institution {{ profile_user.username }}
 {% endblock %}
 
 
 <!--BODY-->
 {% block profile_body %}
+
+{% if user == profile_user %}
+<p>Hi, user!</p>
+{% else %}
+<p>Someone else?</p>
+{% endif %}
 
 {% endblock %}
 

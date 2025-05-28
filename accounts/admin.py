@@ -1,5 +1,14 @@
 from django.contrib import admin
 from .models import User
-# Register your models here.
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-admin.site.register(User)
+class CustomAdmin(UserAdmin):
+    add_form = UserCreationForm
+    form = UserChangeForm
+    model = User
+    list_display = ["username", "email", "account_type"]
+    fieldsets = UserAdmin.fieldsets + ((None, {"fields" : ("account_type",)}),)
+    add_fieldsets = UserAdmin.add_fieldsets + ((None, {"fields" : ("account_type",)}),)
+
+admin.site.register(User, CustomAdmin)

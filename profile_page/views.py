@@ -8,6 +8,7 @@ def view_profile(request, user_id):
     
     context = {
         "title" : user.username,
-        "user" : user
+        "profile_user" : user
     }
+    print("user:", user.username)
     return render(request, "profile_page/profile_page.html", context=context)
