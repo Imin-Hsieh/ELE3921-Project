@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+
+
+<!--Note that the "user" variable refers to the user of the
+    profile page and not the user which is viewing the page-->
+
+{% if user.is_user %}
+    {% include "profile_page/user_profile.html" with user=user %}
+{% endif %}
+
+{% if user.is_professional %}
+    {% include "profile_page/professional_profile.html" with user=user %}
+{% endif %}
+
+{% if user.is_institution %}
+    {% include "profile_page/institution_profile.html" with user=user %}
+{% endif %}

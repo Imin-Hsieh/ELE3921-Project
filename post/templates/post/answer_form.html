@@ -2,7 +2,7 @@
 
 {% block method %}post{% endblock %}
 
-{% block action %}{% url 'submit_answer' post.id %}{% endblock %}
+{% block action %}{% url 'submit_answer' %}{% endblock %}
 
 {% block content %}
 
@@ -28,6 +28,9 @@
     </ul>
     {% endif %}
 </div>
+
+<!--To be able to send in the post id to the view: -->
+<input type="hidden" name="post_id" value="{{ post.id }}">
 
 {% endblock %}
 

@@ -9,8 +9,8 @@ class UserProfile(models.Model):
 
 class ProfessionalProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="professional_profile")
-    specializations = models.ManyToManyField(Category, related_name="professionals")
+    specializations = models.ManyToManyField(Category, related_name="professionals", blank=True)
 
 class InstitutionProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="institution_profile")
-    professionals = models.ManyToManyField(ProfessionalProfile, related_name="institutions")
+    professionals = models.ManyToManyField(ProfessionalProfile, related_name="institutions", blank=True)

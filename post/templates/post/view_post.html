@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 
 
 {% block content %}
 <div class="container-fluid">
     <h5>Title: {{ post.title }}</h5>
-    <p>Author: {{ post.author.username }}</p>
+    <p>Author: {{ post.author.user.username }}</p>
     <div>
         {{ post.content|linebreaks }}
     </div>
@@ -25,13 +26,10 @@
     {% endif %}
     
     <h5>Answers</h5>
-    <!--Include a button if the user is a Professional, to let them answer-->
-    <ul>
-        {% for answer in post.answers.all %}
-            <!--probably include another template instead of a ul like this-->
-            <li>{{ answer.author }}</li>
-        {% endfor %}
-    </ul>
+
+    {% for answer in post.answers.all %}
+        {% include "post/answer.html" with answer=answer %}
+    {% endfor %}
 </div>
 
 <script src="{% static 'js/view_post.js' %}"></script>

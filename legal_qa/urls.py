@@ -22,5 +22,6 @@ urlpatterns = [
     path("", include("core.urls")),
     path("accounts/", include("accounts.urls")),
     path("post/", include("post.urls")),
-    path("search/", include("search.urls"))
+    path("search/", include("search.urls")),
+    path("profile/", include("profile_page.urls"))
 ]
