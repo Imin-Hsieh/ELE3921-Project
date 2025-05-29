@@ -1,6 +1,6 @@
 <!--Provide variable "post" when including-->
 
-<a href="{% url 'view_post' post.id %}" class="text-decoration-none popout">
+<a href="{% url 'view_post' post.id %}" class="text-decoration-none popout px-0">
     <div class="card">
         <div class="card-header"><h5>{{ post.title }}</h5></div>
         <div class="card-body"><p class="fst-italic">{{ post.content|truncatechars:150 }}</p></div>

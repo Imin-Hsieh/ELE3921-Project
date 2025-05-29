@@ -3,12 +3,19 @@
 
 <!--HEADER-->
 {% block profile_header %}
-User
+{{ profile_user.username }}
 {% endblock %}
 
 
 <!--BODY-->
 {% block profile_body %}
+
+<h5>Posts:</h5>
+<ul>
+    {% for post in profile_user.user_profile.posts.all %}
+    <li><a href="{% url 'view_post' answer.post.id %}">{{ answer.post.title }}</a></li>
+    {% endfor %}
+</ul>
 
 {% endblock %}
 

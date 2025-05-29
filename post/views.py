@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from profile_page.models import Category
-from .models import Post
+from .models import Post, Answer, Rating
 from .forms import PostForm, AnswerForm
 from django.contrib import messages
 from django.urls import reverse
+from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 
 # Write posts and post them
 def write_post(request):
@@ -76,3 +78,33 @@ def submit_answer(request):
         "form" : form
     }
     return render(request, "post/view_post.html", context=context)
+
+
+# Creates a rating if none exists
+@require_POST
+def like_answer(request, answer_id):
+    print("WE GOT HEREWE GOT HEREWE GOT HEREWE GOT HEREWE GOT HEREWE GOT HEREWE GOT HERE")
+    user = request.user
+    answer = Answer.objects.get(id=answer_id)
+    post = answer.post
+
+    if not user.is_authenticated:
+        messages.error(request, "Error: you must log in.")
+        return redirect("login")
+    
+    if not user.is_professional:
+        messages.error(request, "Error: only professional users can rate answers.")
+        return redirect(reverse("view_post", kwargs={"post_id" : post.id}))
+    
+    rating_already_existed = Rating.objects.filter(answer=answer, professional=user.professional_profile).exists()
+
+    if not rating_already_existed:
+        rating = Rating.objects.create(answer=answer, professional=user.professional_profile)
+
+    count = answer.ratings.count()
+
+    return JsonResponse({
+        "count" : count,
+        "already_liked" : rating_already_existed
+    })
+    

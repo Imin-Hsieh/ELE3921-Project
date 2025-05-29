@@ -2,5 +2,11 @@
 
 {% block content %}
     <a href="{% url 'write_post' %}" class="btn btn-primary">Write a new post</a>
+    <h3>Recent posts</h3>
     {% include "search/search_bar.html" %}
+    <div class="row">
+        {% for post in posts %}
+            {% include "post/post_preview.html" with post=post %}
+        {% endfor %}
+    </div>
 {% endblock %}

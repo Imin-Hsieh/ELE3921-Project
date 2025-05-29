@@ -12,5 +12,4 @@ def view_profile(request, user_id):
         "profile_user" : user,
         "categories" : Category.objects.all()
     }
-    print("user:", user.username)
     return render(request, "profile_page/profile_page.html", context=context)

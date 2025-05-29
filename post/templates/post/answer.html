@@ -1,8 +1,30 @@
+{% load static %}
+
 <div class="card">
     <div class="card-header">{{ answer.title }}</div>
     <div class="card-body">
         <p>Written by: {{ answer.author.user.first_name }} {{ answer.author.user.last_name }}</p>
         <pre>{{ answer.content }}</pre>
     </div>
-    <div class="card-footer">PLACEHOLDER, PROBABLY IMPLEMENT THE +1 FEATURE</div>
+    <div class="card-footer">
+        {% if user.is_professional %}
+        <button type="button" class="btn btn-primary thumbs-up-button" id="thumb-{{ answer.id }}" data-answer-id="{{ answer.id }}">
+            <i class="bi bi-hand-thumbs-up"></i>
+            <span>{{ answer.ratings.count }}</span>
+        </button>
+        {% else %}
+        <div>
+            <i class="bi bi-hand-thumbs-up"></i>
+            <span>{{ answer.ratings.count }}</span>
+        </div>
+        {% endif %}
+        <div class="toast" id="alreadyToast{{ answer.id }}">
+            <div class="toast-header">
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+                You have already liked this answer!
+            </div>
+        </div>
+    </div>
 </div>

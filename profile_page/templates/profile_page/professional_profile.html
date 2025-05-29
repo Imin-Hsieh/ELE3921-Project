@@ -3,17 +3,31 @@
 
 <!--HEADER-->
 {% block profile_header %}
-Professional
+{{ profile_user.first_name }} {{ profile_user.last_name }}
 {% endblock %}
 
 
 <!--BODY-->
 {% block profile_body %}
 
+<h5>Associated institutions:</h5>
+<ul>
+    {% for prof in profile_user.professional_profile.institutions.all %}
+    <li><a href="{% url 'view_profile' prof.user.id %}">{{ prof.user.first_name }}</a></li>
+    {% endfor %}
+</ul>
+
 {% endblock %}
 
 
 <!--FOOTER-->
 {% block profile_footer %}
+
+<h5>Posts answered:</h5>
+<ul>
+    {% for answer in profile_user.professional_profile.answers.all %}
+    <li><a href="{% url 'view_post' answer.post.id %}">{{ answer.post.title }}</a></li>
+    {% endfor %}
+</ul>
 
 {% endblock %}
