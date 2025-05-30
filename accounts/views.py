@@ -70,5 +70,9 @@ def register_prof(request):
         messages.success(request, "Registration successful!")
         return redirect("view_profile", user_id=institution_id)
     
-    messages.error("Registration failed.")
-    return redirect("view_profile", user_id=institution_id)
+    context = {
+        "title" : "Register professional",
+        "form" : form,
+        "institution_id" : institution_id
+    }
+    return render(request, "accounts/register_prof_page.html", context=context)
