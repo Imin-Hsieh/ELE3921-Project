@@ -13,6 +13,9 @@
     <em>Legal name: {{ profile_user.last_name }}</em>
 </div>
 
+<h5>About us:</h5>
+<pre>{{ profile_user.institution_profile.bio }}</pre>
+
 <div>
 {% if user == profile_user %}
 {% include "accounts/register_prof_modal.html" with institution_id=profile_user.id id="profRegisterModal" %}

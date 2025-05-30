@@ -8,11 +8,11 @@
     <p>There were no search results for "{{ request.GET.q }}"</p>
 
 {% else %}
-
+<div class="row">
     {% for post in posts %}
         {% include "post/post_preview.html" with post=post %}
     {% endfor %}
-
+</div>
 {% endif %}
 
 {% endblock %}

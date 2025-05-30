@@ -17,7 +17,8 @@ def search(request):
             if term.lower() not in STOP_WORDS:
                 query_results = Post.objects.filter(content__icontains=term)
                 search_results.update(query_results)
-
+    else:
+        search_results = Post.objects.all()
     context = {
         "title"  : "Search results",
         "posts" : list(search_results)

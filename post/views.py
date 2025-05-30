@@ -25,6 +25,7 @@ def write_post(request):
             post = form.save(commit=False)
             post.author = request.user.user_profile
             post.save()
+            post.categories.set(form.cleaned_data.get("categories"))
             return redirect(reverse("view_post", kwargs={"post_id" : post.id}))
     else:
         form = PostForm()
