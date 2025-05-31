@@ -108,4 +108,40 @@ def like_answer(request, answer_id):
         "count" : count,
         "already_liked" : rating_already_existed
     })
+
+@require_POST
+def delete_post(request):
+    post_id = request.POST.get("delete_post_id")
+    post = get_object_or_404(Post, id=post_id)
+
+    if not request.user.is_authenticated:
+        messages.error(request, "Error: you must log in.")
+        return redirect("login")
     
+    if not request.user.user_profile == post.author:
+        messages.error(request, "Error: only the author of a post may delete it.")
+        return redirect(reverse("view_post", kwargs={"post_id" : post_id}))
+    
+    post.delete()
+    messages.success(request, "Post deleted.")
+    return redirect("home")
+
+
+    
+@require_POST
+def delete_answer(request):
+    answer_id = request.POST.get("delete_answer_id")
+    answer = get_object_or_404(Answer, id=answer_id)
+    post = answer.post
+
+    if not request.user.is_authenticated:
+        messages.error(request, "Error: you must log in.")
+        return redirect("login")
+    
+    if not request.user.professional_profile == answer.author:
+        messages.error(request, "Error: only the author of an answer may delete it.")
+        return redirect(reverse("view_post", kwargs={"post_id" : post.id}))
+    
+    answer.delete()
+    messages.success(request, "Answer deleted.")
+    return redirect(reverse("view_post", kwargs={"post_id" : post.id}))

@@ -1,7 +1,17 @@
 {% load static %}
 
 <div class="card">
-    <div class="card-header">{{ answer.title }}</div>
+    <div class="card-header">{{ answer.title }}
+        {% if request.user.is_professional %}
+            {% if request.user.professional_profile == answer.author %}
+            <form action="{% url 'delete_answer' %}" method="post" onsubmit="return confirm('Are you sure you want to delete your answer?')">
+                {% csrf_token %}
+                <input type="hidden" name="delete_answer_id" value="{{ answer.id }}">
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+            {% endif %}
+        {% endif %}
+    </div>
     <div class="card-body">
         <p>Written by: {{ answer.author.user.first_name }} {{ answer.author.user.last_name }}</p>
         <pre>{{ answer.content }}</pre>
