@@ -20,7 +20,7 @@ def professionals_view(request):
     # amount of total ratings, order by their total number of answers.
     professionals = ProfessionalProfile.objects.annotate(
         total_ratings=Coalesce(Sum("answers__ratings__value"), Value(0)),
-        answer_count=Count("answers")
+        answer_count=Coalesce(Count("answers", distinct=True), Value(0))
     ).order_by("-total_ratings", "-answer_count")
 
     context = {
@@ -33,7 +33,7 @@ def professionals_view(request):
 def institutions_view(request):
     institutions = InstitutionProfile.objects.annotate(
         total_ratings=Coalesce(Sum("professionals__answers__ratings__value"), Value(0)),
-        answer_count=Count("professionals__answers")
+        answer_count=Coalesce(Count("professionals__answers", distinct=True), Value(0))
     ).order_by("-total_ratings", "-answer_count")
 
     context = {
