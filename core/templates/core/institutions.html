@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Institutions</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Institution</th>
+            <th>Total number of answers</th>
+            <th>Total rating score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for inst in institutions %}
+            <tr>
+                <td><a href="{% url 'view_profile' inst.user.id %}">{{ inst.user.first_name }}</a></td>
+                <td>{{ inst.answer_count }}</td>
+                <td>{{ inst.total_ratings }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Professionals</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Number of answers</th>
+            <th>Total rating score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prof in professionals %}
+            <tr>
+                <td><a href="{% url 'view_profile' prof.user.id %}">{{ prof.user.first_name }} {{ prof.user.last_name }}</a></td>
+                <td>{{ prof.answer_count }}</td>
+                <td>{{ prof.total_ratings }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

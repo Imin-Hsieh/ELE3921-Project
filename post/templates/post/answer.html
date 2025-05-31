@@ -13,7 +13,7 @@
         {% endif %}
     </div>
     <div class="card-body">
-        <p>Written by: {{ answer.author.user.first_name }} {{ answer.author.user.last_name }}</p>
+        <p>Written by: <a href="{% url 'view_profile' answer.author.user.id %}">{{ answer.author.user.first_name }} {{ answer.author.user.last_name }}</a></p>
         <pre>{{ answer.content }}</pre>
     </div>
     <div class="card-footer">
