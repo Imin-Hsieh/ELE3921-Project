@@ -14,7 +14,7 @@
     </div>
     <div class="card-body">
         <p>Written by: <a href="{% url 'view_profile' answer.author.user.id %}">{{ answer.author.user.first_name }} {{ answer.author.user.last_name }}</a></p>
-        <pre>{{ answer.content }}</pre>
+        <div class="post-content">{{ answer.content }}</div>
     </div>
     <div class="card-footer">
         {% if user.is_professional %}
